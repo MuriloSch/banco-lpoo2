@@ -3,10 +3,10 @@ package util;
 import java.sql.*;
 
 /**
- * Classe utilitária para gerar números de conta únicos.
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
+
 public class GeradorNumeroConta {
 
     // Método para gerar o número da conta

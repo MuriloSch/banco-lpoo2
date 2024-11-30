@@ -11,10 +11,10 @@ import model.ContaInvestimento;
 import view.TelaInicialView;
 
 /**
- * Controlador para operações de conta (depósito, saque, saldo, remuneração)
- * 
- * @author Murilo
+ *
+ * @author Murilo Schrickte and Pietra Minatti
  */
+
 public class ContaOperacaoController {
     private final ContaOperacaoView contaOperacaoView;
     private final ContaOperacaoDAO contaOperacaoDAO;

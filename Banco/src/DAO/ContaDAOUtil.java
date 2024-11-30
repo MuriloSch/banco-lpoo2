@@ -11,8 +11,9 @@ import java.util.List;
 
 /**
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
+
 public class ContaDAOUtil {
 
     // Método para construir uma única conta a partir do ResultSet

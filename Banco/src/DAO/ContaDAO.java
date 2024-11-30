@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DAO para gerenciamento de contas no banco de dados.
- * 
- * @author Murilo Schrickte
+ *
+ * @author Murilo Schrickte and Pietra Minatti
  */
+
 public class ContaDAO {
 
     // Método para criar uma conta

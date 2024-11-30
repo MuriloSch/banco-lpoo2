@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
 
 public class ClienteView extends JFrame {

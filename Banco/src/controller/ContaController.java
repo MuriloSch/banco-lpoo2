@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
 
 public class ContaController {

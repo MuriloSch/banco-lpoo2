@@ -2,7 +2,7 @@ package model;
 
 /**
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
 
 public interface ContaI {

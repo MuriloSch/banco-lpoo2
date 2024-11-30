@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
 
 //Classe de conexão com o banco

@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
 
 public class Cliente implements Comparable<Cliente> {

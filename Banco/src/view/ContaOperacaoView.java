@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Tela para realizar operações de conta bancária.
- * 
- * @author Murilo Schrickte
+ *
+ * @author Murilo Schrickte and Pietra Minatti
  */
+
 public class ContaOperacaoView extends JFrame {
     private JTextField cpfField;
     private JTextField valorField;

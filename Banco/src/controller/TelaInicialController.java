@@ -1,20 +1,16 @@
 package controller;
 
 import view.TelaInicialView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import view.ClienteView;
 import view.ContaView;
 import view.ContaOperacaoView;
-import controller.ClienteController;
-import controller.ContaController;
 import DAO.ClienteDAO;
 import DAO.ContaDAO;
 import DAO.ContaOperacaoDAO;
 
 /**
  *
- * @author Murilo Schrickte
+ * @author Murilo Schrickte and Pietra Minatti
  */
 
 public class TelaInicialController {
