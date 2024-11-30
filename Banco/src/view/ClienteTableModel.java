@@ -4,15 +4,17 @@
  */
 package view;
 
-/**
- *
- * @author Murilo Schrickte
- */
 import model.Cliente;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
+/**
+ *
+ * @author Murilo Schrickte
+ */
+
+//Modelo de tabela
 public class ClienteTableModel extends AbstractTableModel {
     private final String[] colunas = {"ID", "Nome", "Sobrenome", "RG", "CPF", "Endereço"};
     private List<Cliente> clientes;

@@ -4,15 +4,16 @@
  */
 package main;
 
+import controller.ClienteController;
+import DAO.ClienteDAO;
+import view.ClienteView;
+
 /**
  *
  * @author Murilo Schrickte
  */
 
-import controller.ClienteController;
-import DAO.ClienteDAO;
-import view.ClienteView;
-
+//Main temporária
 public class Main {
     public static void main(String[] args) {
         ClienteView view = new ClienteView();

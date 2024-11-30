@@ -4,10 +4,6 @@
  */
 package controller;
 
-/**
- *
- * @author Murilo Schrickte
- */
 import DAO.ClienteDAO;
 import model.Cliente;
 import view.ClienteTableModel;
@@ -17,6 +13,11 @@ import javax.swing.*;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ *
+ * @author Murilo Schrickte
+ */
+
 public class ClienteController {
     private ClienteView view;
     private ClienteDAO dao;
@@ -24,11 +25,11 @@ public class ClienteController {
     public ClienteController(ClienteView view, ClienteDAO dao) {
         this.view = view;
         this.dao = dao;
-
         configurarAcoes();
         atualizarTabela();
     }
-
+    
+    //Listeners e direcionamentos
     private void configurarAcoes() {
         view.getBtnAdicionar().addActionListener(e -> adicionarCliente());
         view.getBtnAtualizar().addActionListener(e -> atualizarCliente());
@@ -36,7 +37,7 @@ public class ClienteController {
         view.getBtnBuscar().addActionListener(e -> buscarClientes());
         view.getComboOrdenacao().addActionListener(e -> ordenarClientes());
     }
-
+    //Att tabela
     private void atualizarTabela() {
         try {
             List<Cliente> clientes = dao.listar();
@@ -46,7 +47,8 @@ public class ClienteController {
             mostrarErro("Erro ao listar clientes: " + e.getMessage());
         }
     }
-
+    
+    //Add cliente
     private void adicionarCliente() {
         String nome = view.getTxtNome().getText();
         String sobrenome = view.getTxtSobrenome().getText();
@@ -64,6 +66,7 @@ public class ClienteController {
         }
     }
 
+    //Att cliente
     private void atualizarCliente() {
         int selectedRow = view.getTabelaClientes().getSelectedRow();
         if (selectedRow == -1) {
@@ -88,6 +91,7 @@ public class ClienteController {
         }
     }
 
+    //Exclui cliente
     private void excluirCliente() {
         int selectedRow = view.getTabelaClientes().getSelectedRow();
         if (selectedRow == -1) {
@@ -113,6 +117,7 @@ public class ClienteController {
         }
     }
 
+    //Busca cliente
     private void buscarClientes() {
         String termo = view.getTxtBuscar().getText();
         String criterio = view.getComboCriterio().getSelectedItem().toString();
@@ -132,14 +137,12 @@ public class ClienteController {
         }
     }
 
+    //Ordena cliente
     private void ordenarClientes() {
         String ordenacao = view.getComboOrdenacao().getSelectedItem().toString();
         ClienteTableModel model = (ClienteTableModel) view.getTabelaClientes().getModel();
         List<Cliente> clientes = model.getClientes();
-
-        // Usando o comparador global
         clientes.sort(Cliente.compararPorCampo(ordenacao));
-
         model.fireTableDataChanged();
     }
 

@@ -4,11 +4,6 @@
  */
 package DAO;
 
-/**
- *
- * @author Murilo Schrickte
- */
-
 import model.Cliente;
 import util.DBConn;
 
@@ -16,7 +11,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *
+ * @author Murilo Schrickte
+ */
+
 public class ClienteDAO {
+    
+    //Inserir cliente
     public void inserir(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, sobrenome, rg, cpf, endereco) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConn.getConnection();
@@ -29,7 +32,8 @@ public class ClienteDAO {
             stmt.executeUpdate();
         }
     }
-
+    
+     //Atualizar cliente
     public void atualizar(Cliente cliente) throws SQLException {
         String sql = "UPDATE cliente SET nome = ?, sobrenome = ?, rg = ?, cpf = ?, endereco = ? WHERE id = ?";
         try (Connection conn = DBConn.getConnection();
@@ -43,7 +47,8 @@ public class ClienteDAO {
             stmt.executeUpdate();
         }
     }
-
+    
+     //Excluir cliente
     public void excluir(int id) throws SQLException {
         String sql = "DELETE FROM cliente WHERE id = ?";
         try (Connection conn = DBConn.getConnection();
@@ -53,6 +58,7 @@ public class ClienteDAO {
         }
     }
 
+      //Listar cliente - Sem filtros
     public List<Cliente> listar() throws SQLException {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
@@ -73,23 +79,28 @@ public class ClienteDAO {
         }
         return clientes;
     }
-
+    
+     //Listar por nome
 public List<Cliente> buscarPorNome(String nome) throws SQLException {
         return buscarClientes("SELECT * FROM cliente WHERE nome LIKE ?", "%" + nome + "%");
     }
-
+        
+    //Listar por sobrenome
     public List<Cliente> buscarPorSobrenome(String sobrenome) throws SQLException {
         return buscarClientes("SELECT * FROM cliente WHERE sobrenome LIKE ?", "%" + sobrenome + "%");
     }
-
+    
+    //Listar por RG
     public List<Cliente> buscarPorRG(String rg) throws SQLException {
         return buscarClientes("SELECT * FROM cliente WHERE rg LIKE ?", "%" + rg + "%");
     }
-
+    
+    //Listar por CPF
     public List<Cliente> buscarPorCPF(String cpf) throws SQLException {
         return buscarClientes("SELECT * FROM cliente WHERE cpf LIKE ?", "%" + cpf + "%");
     }
-
+    
+    //Buscar clientes
     private List<Cliente> buscarClientes(String sql, String parametro) throws SQLException {
         List<Cliente> clientes = new ArrayList<>();
         try (Connection conn = DBConn.getConnection();

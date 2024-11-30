@@ -4,17 +4,15 @@
  */
 package view;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author Murilo Schrickte
  */
 
-import javax.swing.*;
-import java.awt.*;
-
 public class ClienteView extends JFrame {
-
-    // Declaração de componentes
     private JTable tabelaClientes;
     private JTextField txtBuscar;
     private JButton btnAdicionar;
@@ -24,8 +22,6 @@ public class ClienteView extends JFrame {
     private JScrollPane scrollPane;
     private JComboBox<String> comboCriterio;
     private JComboBox<String> comboOrdenacao;
-
-    // Campos de edição de cliente
     private JTextField txtNome;
     private JTextField txtSobrenome;
     private JTextField txtRG;
@@ -41,11 +37,9 @@ public class ClienteView extends JFrame {
         setTitle("Gerenciamento de Clientes");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
-
-        // Layout Principal
         setLayout(new BorderLayout());
 
-        // Painel Superior (Busca)
+        //Parte superior
         JPanel panelBusca = new JPanel();
         txtBuscar = new JTextField(20);
         btnBuscar = new JButton("Buscar");
@@ -66,25 +60,23 @@ public class ClienteView extends JFrame {
         panelBusca.add(comboOrdenacao);
         add(panelBusca, BorderLayout.NORTH);
 
-        // Tabela de Clientes
+        //Tabela central
         tabelaClientes = new JTable();
         scrollPane = new JScrollPane(tabelaClientes);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Painel Inferior (Edição e botões)
+        //Parte inferior
         JPanel panelInferior = new JPanel(new BorderLayout());
         add(panelInferior, BorderLayout.SOUTH);
 
-        // Painel de edição
+        //Parte inferior - Edição
         JPanel panelEdicao = new JPanel(new GridLayout(5, 2, 5, 5));
         panelEdicao.setBorder(BorderFactory.createTitledBorder("Dados do Cliente"));
-
         txtNome = new JTextField();
         txtSobrenome = new JTextField();
         txtRG = new JTextField();
         txtCPF = new JTextField();
         txtEndereco = new JTextField();
-
         panelEdicao.add(new JLabel("Nome:"));
         panelEdicao.add(txtNome);
         panelEdicao.add(new JLabel("Sobrenome:"));
@@ -95,10 +87,9 @@ public class ClienteView extends JFrame {
         panelEdicao.add(txtCPF);
         panelEdicao.add(new JLabel("Endereço:"));
         panelEdicao.add(txtEndereco);
-
         panelInferior.add(panelEdicao, BorderLayout.CENTER);
 
-        // Painel de botões
+        //Parte inferior - botões
         JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btnAdicionar = new JButton("Adicionar");
         btnAtualizar = new JButton("Atualizar");
@@ -110,7 +101,7 @@ public class ClienteView extends JFrame {
         panelInferior.add(panelBotoes, BorderLayout.SOUTH);
     }
 
-    // Getters para componentes
+    //Gets
     public JTable getTabelaClientes() {
         return tabelaClientes;
     }
@@ -164,12 +155,12 @@ public class ClienteView extends JFrame {
     }
 
 
-    // Para definir o modelo da tabela
+    //Aplicação do TableModel
     public void setTableModel(ClienteTableModel model) {
         tabelaClientes.setModel(model);
     }
 
-    // Limpa os campos de edição
+    //Limpa campos
     public void limparCampos() {
         txtNome.setText("");
         txtSobrenome.setText("");
@@ -178,7 +169,7 @@ public class ClienteView extends JFrame {
         txtEndereco.setText("");
     }
 
-    // Preenche os campos com dados de um cliente
+    //Preenche campos
     public void preencherCampos(String nome, String sobrenome, String rg, String cpf, String endereco) {
         txtNome.setText(nome);
         txtSobrenome.setText(sobrenome);

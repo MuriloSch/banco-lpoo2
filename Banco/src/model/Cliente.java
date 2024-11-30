@@ -19,7 +19,7 @@ public class Cliente implements Comparable<Cliente> {
     private String cpf;
     private String endereco;
 
-    // Construtor, getters e setters
+    // Construtor
     public Cliente(int id, String nome, String sobrenome, String rg, String cpf, String endereco) {
         this.id = id;
         this.nome = nome;
@@ -27,10 +27,6 @@ public class Cliente implements Comparable<Cliente> {
         this.rg = rg;
         this.cpf = cpf;
         this.endereco = endereco;
-    }
-
-    public Cliente(int aInt, String string, String string0, String string1, String string2, String string3, double aDouble) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     // Getters e Setters
@@ -81,19 +77,19 @@ public class Cliente implements Comparable<Cliente> {
         return this.nome.compareToIgnoreCase(outro.nome);
     }
 
-    // Comparadores estáticos para ordenação
+    // Comparador de nome
     public static Comparator<Cliente> compararPorNome() {
         return Comparator.comparing(Cliente::getNome, String.CASE_INSENSITIVE_ORDER);
     }
-
+    // Comparador de sobrenome
     public static Comparator<Cliente> compararPorSobrenome() {
         return Comparator.comparing(Cliente::getSobrenome, String.CASE_INSENSITIVE_ORDER);
     }
-
+    // Comparador de RG
     public static Comparator<Cliente> compararPorRG() {
         return Comparator.comparing(Cliente::getRg, String.CASE_INSENSITIVE_ORDER);
     }
-
+    // Comparador de CPF
     public static Comparator<Cliente> compararPorCPF() {
         return Comparator.comparing(Cliente::getCpf, String.CASE_INSENSITIVE_ORDER);
     }
