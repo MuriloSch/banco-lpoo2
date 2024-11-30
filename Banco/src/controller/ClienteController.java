@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import DAO.ClienteDAO;
 import model.Cliente;
 import view.ClienteTableModel;
 import view.ClienteView;
-
+import view.TelaInicialView;
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,10 +17,12 @@ import java.util.List;
 public class ClienteController {
     private ClienteView view;
     private ClienteDAO dao;
+    private final TelaInicialView telaIni;
 
-    public ClienteController(ClienteView view, ClienteDAO dao) {
+    public ClienteController(ClienteView view, ClienteDAO dao, TelaInicialView telaIni) {
         this.view = view;
         this.dao = dao;
+        this.telaIni = telaIni;
         configurarAcoes();
         atualizarTabela();
     }
@@ -36,6 +34,7 @@ public class ClienteController {
         view.getBtnExcluir().addActionListener(e -> excluirCliente());
         view.getBtnBuscar().addActionListener(e -> buscarClientes());
         view.getComboOrdenacao().addActionListener(e -> ordenarClientes());
+        view.voltarIni(e -> voltarIni());
     }
     //Att tabela
     private void atualizarTabela() {
@@ -148,5 +147,10 @@ public class ClienteController {
 
     private void mostrarErro(String mensagem) {
         JOptionPane.showMessageDialog(view, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void voltarIni() {
+        view.dispose();  // Fecha a tela atual (ContaView)
+        telaIni.setVisible(true);  // Exibe a tela principal novamente
     }
 }

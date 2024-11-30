@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import model.Cliente;
@@ -81,9 +77,33 @@ public class ClienteDAO {
     }
     
      //Listar por nome
-public List<Cliente> buscarPorNome(String nome) throws SQLException {
+    public List<Cliente> buscarPorNome(String nome) throws SQLException {
         return buscarClientes("SELECT * FROM cliente WHERE nome LIKE ?", "%" + nome + "%");
     }
+    
+        public Cliente buscaPorId(int id) throws SQLException {
+            String sql = "SELECT * FROM cliente WHERE id = ?";
+            try (Connection conn = DBConn.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);  // Usa o ID para a busca exata (sem o LIKE e sem o '%')
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        // Cria um novo cliente com os dados do ResultSet
+                        Cliente cliente = new Cliente(
+                            rs.getInt("id"),
+                            rs.getString("nome"),
+                            rs.getString("sobrenome"),
+                            rs.getString("rg"),
+                            rs.getString("cpf"),
+                            rs.getString("endereco")
+                        );
+                        return cliente;  // Retorna o cliente encontrado
+                    }
+                }
+            }
+            return null;  // Retorna null se nenhum cliente for encontrado
+        }
         
     //Listar por sobrenome
     public List<Cliente> buscarPorSobrenome(String sobrenome) throws SQLException {
