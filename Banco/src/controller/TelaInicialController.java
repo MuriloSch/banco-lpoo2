@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.ClienteView;
 import view.ContaView;
+import view.ContaOperacaoView;
 import controller.ClienteController;
 import controller.ContaController;
 import DAO.ClienteDAO;
 import DAO.ContaDAO;
+import DAO.ContaOperacaoDAO;
 
 /**
  *
@@ -47,7 +49,11 @@ public class TelaInicialController {
     }
 
     private void abrirTelaOperacoes() {
-       
+         telaInicialView.dispose(); 
+         ContaOperacaoView contaOperacaoView = new ContaOperacaoView();
+         ContaOperacaoDAO contaOperacaoDAO = new ContaOperacaoDAO();
+         ContaOperacaoController contaOperacaoController = new ContaOperacaoController(contaOperacaoView, contaOperacaoDAO, telaInicialView);
+         contaOperacaoView.setVisible(true);
     }
 
     public void exibir() {

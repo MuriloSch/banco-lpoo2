@@ -2,11 +2,9 @@ package DAO;
 
 import model.Cliente;
 import util.DBConn;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  *
@@ -45,14 +43,37 @@ public class ClienteDAO {
     }
     
      //Excluir cliente
-    public void excluir(int id) throws SQLException {
-        String sql = "DELETE FROM cliente WHERE id = ?";
-        try (Connection conn = DBConn.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+public void excluir(int idCliente) throws SQLException {
+    String sqlContas = "DELETE FROM conta WHERE cliente_id = ?";
+    String sqlCliente = "DELETE FROM cliente WHERE id = ?";
+
+    try (Connection conn = DBConn.getConnection()) {
+        // Inicia a transação
+        conn.setAutoCommit(false);
+
+        try (PreparedStatement stmtContas = conn.prepareStatement(sqlContas);
+             PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
+
+            // Exclui todas as contas associadas ao cliente
+            stmtContas.setInt(1, idCliente);
+            stmtContas.executeUpdate();
+
+            // Exclui o cliente
+            stmtCliente.setInt(1, idCliente);
+            stmtCliente.executeUpdate();
+
+            // Confirma a transação
+            conn.commit();
+        } catch (SQLException e) {
+            // Reverte a transação em caso de erro
+            conn.rollback();
+            throw e;
+        } finally {
+            // Restaura o estado padrão de auto-commit
+            conn.setAutoCommit(true);
         }
     }
+}
 
       //Listar cliente - Sem filtros
     public List<Cliente> listar() throws SQLException {

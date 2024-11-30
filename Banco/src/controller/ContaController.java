@@ -55,21 +55,15 @@ public class ContaController {
                 return;
             }
 
-            // Verificar se o formato da string do cliente está correto
+            // Verifica o formato da string do cliente
             String[] partes = clienteSelecionado.split(" - ");
             if (partes.length < 2) {
                 contaView.exibirMensagemErro("Seleção inválida do cliente.");
                 return;
             }
-            
-            String limiteTeste = contaView.getLimite();
-            System.out.println("Valor do Limite: " + limiteTeste);
-            
-            String depIni = contaView.getDepositoInicial();
-            System.out.println("Valor do Dep: " + depIni); // Verifique o valor aqui
 
-            int clienteId = Integer.parseInt(partes[0].trim()); // Extrai o ID do cliente
-            Cliente cliente = clienteDAO.buscaPorId(clienteId); // Busca o cliente no banco de dados
+            int clienteId = Integer.parseInt(partes[0].trim());
+            Cliente cliente = clienteDAO.buscaPorId(clienteId);
 
             if (cliente == null) {
                 contaView.exibirMensagemErro("Cliente não encontrado.");
@@ -80,13 +74,10 @@ public class ContaController {
             double depositoInicial = Double.parseDouble(contaView.getDepositoInicial());
             Conta novaConta;
 
-            // Criar conta corrente
             if ("Conta Corrente".equals(tipoConta)) {
                 double limite = Double.parseDouble(contaView.getLimite());
                 novaConta = new ContaCorrente(cliente, depositoInicial, limite);
-            }
-            // Criar conta investimento
-            else if ("Conta Investimento".equals(tipoConta)) {
+            } else if ("Conta Investimento".equals(tipoConta)) {
                 double montanteMinimo = Double.parseDouble(contaView.getMontanteMinimo());
                 double depositoMinimo = Double.parseDouble(contaView.getDepositoMinimo());
                 novaConta = new ContaInvestimento(cliente, depositoInicial, montanteMinimo, depositoMinimo);
@@ -95,8 +86,9 @@ public class ContaController {
                 return;
             }
 
-            contaDAO.criarConta(novaConta); // Criação da conta no banco de dados
-            contaView.exibirMensagemSucesso("Conta criada com sucesso!");
+            // Utiliza o DAO para criar a conta (o número será gerado automaticamente)
+            contaDAO.criarConta(novaConta);
+            contaView.exibirMensagemSucesso("Conta criada com sucesso! Número: " + novaConta.getNumero());
 
         } catch (SQLException e) {
             contaView.exibirMensagemErro("Erro ao criar conta: " + e.getMessage());
@@ -104,7 +96,6 @@ public class ContaController {
             contaView.exibirMensagemErro("Preencha os campos corretamente.");
         }
     }
-
     private void voltarIni() {
         contaView.dispose();  // Fecha a tela atual (ContaView)
         telaInicialView.setVisible(true);  // Exibe a tela principal novamente
